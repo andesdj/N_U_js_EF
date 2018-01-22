@@ -3,31 +3,39 @@ var calculadora= {
     //  this.reducirTecla(),
     //this.mostrarPantalla(),
     //  this.teclaIgual(),
-    //this.detectarTecla()
+    //this.asignarNum1()
+    this.interno,
     this.borrarPantalla()
     },
     interno:{
         numeroA:0,
         numeroB:0,
+        intent:0,
         operador:"",
         resultado:""
     },
-    teclaIgual: function(a,b,o){
+    cambiarNum: function(a,b,o){
+      this.interno.numeroA=a,
+      this.interno.numeroB=b,
+      this.interno.operador=o
+    },
+    teclaIgual: function(){
+      var o=this.interno.operador
       switch (o) {
         case "mas":
-          var resultado= a+b
+          var resultado= this.interno.numeroA +this.interno.numeroB
           break;
 
         case "menos":
-          var resultado= a-b
+            var resultado= this.interno.numeroA  - this.interno.numeroB
           break;
 
         case "por":
-          var resultado= a*b
+              var resultado= this.interno.numeroA * this.interno.numeroB
           break;
 
         case "dividido":
-          var resultado= a/b
+              var resultado= this.interno.numeroA + this.interno.numeroB
           break;
         default:
           var resultado=0
@@ -37,24 +45,30 @@ var calculadora= {
 },
 
     borrarPantalla: function(){
+        var self=this
         var p=document.getElementById('display')
         var teclaOn    = document.getElementById('on')
         teclaOn.addEventListener('click', function(){
         p.innerHTML='0'
         // limpiar Variables
+        this.interno.numeroA=100
         })
     },
 
+      recibirOperador: function(o){
+        this.interno.operador=o
+        var p=document.getElementById('display')
+            p.innerHTML=''
+      },
       mostrarPantalla: function(obj){
+        //Validar los 8 caracteres
         var self=this
           var p=document.getElementById('display')
           p.innerHTML=obj
       },
-      detectarTecla: function (){
-        var self= this
-
-
+      asignarNum1: function (){
       },
+
       reducirTecla: function(){
       var self  = this
       var teclas    = document.getElementsByClassName('tecla')
